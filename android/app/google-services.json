@@ -1,44 +1,26 @@
 {
   "project_info": {
-    "project_number": "000000000000",
-    "project_id": "placeholder-firebase-project",
-    "storage_bucket": "placeholder-firebase-project.appspot.com"
+    "project_number": "831282917495",
+    "project_id": "almacen-larrinaga",
+    "storage_bucket": "almacen-larrinaga.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:000000000000:android:1234567890abcdef12345678",
+        "mobilesdk_app_id": "1:831282917495:android:7a90dfd5ccb6ebda3d9672",
         "android_client_info": {
-          "package_name": "com.webkul.bagisto.mobikul"
+          "package_name": "cloud.nodoplatform.almacenlarrinaga"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "000000000000-dummyandroidclient.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.webkul.bagisto.mobikul",
-            "certificate_hash": "0000000000000000000000000000000000000000"
-          }
-        },
-        {
-          "client_id": "000000000000-dummywebclient.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "A12345678901234567890123456789012345678"
+          "current_key": "AIzaSyAbQyqpa92sIOHJ9-lmTFRgk-vSsX_Kofo"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "000000000000-dummywebclient.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }
