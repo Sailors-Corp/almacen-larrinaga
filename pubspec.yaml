@@ -96,7 +96,9 @@ dependencies:
   # Image Zoom & Fullscreen
   photo_view: ^0.15.0
   file_picker: ^11.0.2
-  video_player: ^2.14.0
+  # video_player pinned to a version compatible with the current Dart SDK
+  # (^2.14.0 requires Dart >=3.12.0; this environment runs Dart 3.11.4).
+  video_player: ^2.11.0
 
 dev_dependencies:
   flutter_test:
@@ -110,6 +112,32 @@ dev_dependencies:
   flutter_lints: ^6.0.0
   flutter_driver:
     sdk: flutter
+  flutter_launcher_icons: ^0.14.4
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  macos:
+    generate: true
+    image_path: "tool/app_icon.png"
+  image_path: "tool/app_icon.png"
+  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_foreground: "tool/app_icon.png"
+  remove_alpha_ios: true
+  windows:
+    generate: true
+    image_path: "tool/app_icon.png"
+  web:
+    generate: true
+    image_path: "tool/app_icon.png"
+    background_color: "#FFFFFF"
+    maskable: true
+
+# flutter_html 3.0.0 (archived) calls the top-level `matches()` helper that
+# html 0.15.7 removed, which breaks compilation of every widget test that
+# imports flutter_html transitively. Pin the last compatible version.
+dependency_overrides:
+  html: 0.15.6
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -135,9 +163,10 @@ flutter:
 
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
-  # "family" key with the font family name, and a "fonts" key with a
-  # list giving the asset and other descriptors for the font. For
-  # example:
+  # "family" key and a "fonts" key with an array of fonts. The "family" and
+  # "fonts" keys are required. The "fonts" key contains a list of font
+  # descriptors, each of which has an "asset" key and optional "weight" and
+  # "style" keys.
   # fonts:
   #   - family: Schyler
   #     fonts:
@@ -150,5 +179,5 @@ flutter:
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
   #
-  # For details regarding fonts from package dependencies,
-  # see https://flutter.dev/to/font-from-package
+  # For details regarding fonts from package dependencies, see
+  # https://flutter.dev/to/font-from-package

@@ -64,6 +64,16 @@ assets/ml/
 **/*.webp
 !Docs/features_images/
 !Docs/features_images/**
+
+# App launcher icons - must stay tracked so clones build with correct branding
+!tool/app_icon.png
+!android/app/src/main/res/**/ic_launcher*.png
+!android/app/src/main/res/ic_launcher-playstore.png
+!ios/Runner/Assets.xcassets/AppIcon.appiconset/**
+!macos/Runner/Assets.xcassets/AppIcon.appiconset/**
+!web/favicon.png
+!web/icons/**
+!windows/runner/resources/app_icon.ico
 # Google Services configuration files - ignore by default,
 # but keep the sanitized placeholder files tracked in this repo.
 # **/google-services.json
