@@ -1,4 +1,4 @@
-package com.bagisto.bagisto_flutter
+package cloud.nodoplatform.almacenlarrinaga
 
 import io.flutter.embedding.android.FlutterActivity
 
