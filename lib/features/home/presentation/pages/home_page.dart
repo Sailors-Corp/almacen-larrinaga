@@ -7,7 +7,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../core/widgets/channel_logo.dart';
 import '../../../../core/error/error_mapper.dart';
-import '../../../../core/constants/api_constants.dart';
+import '../../../../core/constants/public_base_url.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/navigation/app_navigator.dart';
 import '../../../../core/wishlist/wishlist_cubit.dart';

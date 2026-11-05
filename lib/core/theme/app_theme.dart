@@ -5,11 +5,15 @@ import 'package:flutter/material.dart';
 /// Dark mode: node-id=92-1730
 
 class AppColors {
-  // Primary
-  static const Color primary500 = Color(0xFFFF6900);
-  static const Color primary600 = Color(0xFFF54900);
+  // Primary — black & red rebrand
+  static const Color primary500 = Color(0xFFE11D29);
+  static const Color primary600 = Color(0xFFC41E23);
 
   // Neutral - Light
+  // Top of the scale (700-900) is pulled down so dark mode renders on true
+  // black (#000000) with layered surfaces (#171717 / #262626). The same
+  // tokens are used as text colours in light mode, where the darker values
+  // only increase contrast.
   static const Color neutral50 = Color(0xFFFAFAFA);
   static const Color neutral100 = Color(0xFFF5F5F5);
   static const Color neutral200 = Color(0xFFE5E5E5);
@@ -17,9 +21,9 @@ class AppColors {
   static const Color neutral400 = Color(0xFFA1A1A1);
   static const Color neutral500 = Color(0xFF737373);
   static const Color neutral600 = Color(0xFF525252);
-  static const Color neutral700 = Color(0xFF404040);
-  static const Color neutral800 = Color(0xFF262626);
-  static const Color neutral900 = Color(0xFF171717);
+  static const Color neutral700 = Color(0xFF262626);
+  static const Color neutral800 = Color(0xFF171717);
+  static const Color neutral900 = Color(0xFF000000);
 
   // Status
   static const Color successGreen = Color(0xFF00A63E);
@@ -220,13 +224,15 @@ class AppTheme {
       useMaterial3: true,
       brightness: Brightness.dark,
       fontFamily: 'Roboto',
-      scaffoldBackgroundColor: AppColors.neutral900,
+      scaffoldBackgroundColor: AppColors.neutral900, // true black
       colorScheme: const ColorScheme.dark(
         primary: AppColors.primary500,
         secondary: AppColors.primary600,
-        surface: AppColors.neutral900,
+        surface: AppColors.neutral900, // true black
         onSurface: AppColors.neutral200,
-        outline: AppColors.neutral800,
+        outline: AppColors.neutral700, // visible border on black
+        error: AppColors.errorRed,
+        onError: AppColors.white,
       ),
       appBarTheme: const AppBarTheme(
         backgroundColor: AppColors.neutral900,
@@ -255,7 +261,7 @@ class AppTheme {
         elevation: 0,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
-      dividerColor: AppColors.neutral800,
+      dividerColor: AppColors.neutral700,
     );
   }
 }

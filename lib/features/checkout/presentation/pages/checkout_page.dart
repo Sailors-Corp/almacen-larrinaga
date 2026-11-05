@@ -634,15 +634,18 @@ class _CheckoutPageViewState extends State<_CheckoutPageView> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          label,
-          style: TextStyle(
-            fontFamily: 'Roboto',
-            fontWeight: FontWeight.w400,
-            fontSize: 14,
-            color: isDark ? AppColors.neutral300 : AppColors.neutral900,
+        Expanded(
+          child: Text(
+            label,
+            style: TextStyle(
+              fontFamily: 'Roboto',
+              fontWeight: FontWeight.w400,
+              fontSize: 14,
+              color: isDark ? AppColors.neutral300 : AppColors.neutral900,
+            ),
           ),
         ),
+        const SizedBox(width: 8),
         GestureDetector(
           onTap: onChangePressed,
           child: Text(
@@ -1636,8 +1639,8 @@ class _CheckoutPageViewState extends State<_CheckoutPageView> {
       onTap: () {
         context.read<CheckoutBloc>().add(ToggleSameAddress());
       },
-      child: SizedBox(
-        height: 24,
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(minHeight: 24),
         child: Row(
           children: [
             SizedBox(
@@ -1668,13 +1671,15 @@ class _CheckoutPageViewState extends State<_CheckoutPageView> {
                     ),
             ),
             const SizedBox(width: 4),
-            Text(
-              ' ${AppLocalizations.of(context)!.checkoutUseSameAddressShipping} ',
-              style: TextStyle(
-                fontFamily: 'Roboto',
-                fontWeight: FontWeight.w400,
-                fontSize: 14,
-                color: isDark ? AppColors.neutral200 : AppColors.neutral800,
+            Expanded(
+              child: Text(
+                ' ${AppLocalizations.of(context)!.checkoutUseSameAddressShipping} ',
+                style: TextStyle(
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.w400,
+                  fontSize: 14,
+                  color: isDark ? AppColors.neutral200 : AppColors.neutral800,
+                ),
               ),
             ),
           ],
@@ -1689,8 +1694,8 @@ class _CheckoutPageViewState extends State<_CheckoutPageView> {
       onTap: () {
         setState(() => _saveToAddressBook = !_saveToAddressBook);
       },
-      child: SizedBox(
-        height: 24,
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(minHeight: 24),
         child: Row(
           children: [
             SizedBox(
@@ -1721,13 +1726,15 @@ class _CheckoutPageViewState extends State<_CheckoutPageView> {
                     ),
             ),
             const SizedBox(width: 4),
-            Text(
-              ' ${AppLocalizations.of(context)!.accountSaveToAddressBook} ',
-              style: TextStyle(
-                fontFamily: 'Roboto',
-                fontWeight: FontWeight.w400,
-                fontSize: 14,
-                color: isDark ? AppColors.neutral200 : AppColors.neutral800,
+            Expanded(
+              child: Text(
+                ' ${AppLocalizations.of(context)!.accountSaveToAddressBook} ',
+                style: TextStyle(
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.w400,
+                  fontSize: 14,
+                  color: isDark ? AppColors.neutral200 : AppColors.neutral800,
+                ),
               ),
             ),
           ],
@@ -2014,17 +2021,20 @@ class _CheckoutPageViewState extends State<_CheckoutPageView> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      '$pricePerUnit x $quantity ${quantity == 1 ? AppLocalizations.of(context)!.cartUnit : AppLocalizations.of(context)!.cartUnits}',
-                      style: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w400,
-                        fontSize: 14,
-                        color: isDark
-                            ? AppColors.neutral300
-                            : AppColors.neutral900,
+                    Expanded(
+                      child: Text(
+                        '$pricePerUnit x $quantity ${quantity == 1 ? AppLocalizations.of(context)!.cartUnit : AppLocalizations.of(context)!.cartUnits}',
+                        style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.w400,
+                          fontSize: 14,
+                          color: isDark
+                              ? AppColors.neutral300
+                              : AppColors.neutral900,
+                        ),
                       ),
                     ),
+                    const SizedBox(width: 8),
                     Text(
                       totalPrice,
                       style: TextStyle(
@@ -2237,16 +2247,18 @@ class _CheckoutPageViewState extends State<_CheckoutPageView> {
                     color: isDark ? AppColors.neutral500 : AppColors.neutral400,
                   ),
                   const SizedBox(width: 8),
-                  Text(
-                    AppLocalizations.of(
-                      context,
-                    )!.checkoutSelectShippingMethodFirst,
-                    style: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontSize: 13,
-                      color: isDark
-                          ? AppColors.neutral500
-                          : AppColors.neutral400,
+                  Expanded(
+                    child: Text(
+                      AppLocalizations.of(
+                        context,
+                      )!.checkoutSelectShippingMethodFirst,
+                      style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontSize: 13,
+                        color: isDark
+                            ? AppColors.neutral500
+                            : AppColors.neutral400,
+                      ),
                     ),
                   ),
                 ],
@@ -2795,15 +2807,18 @@ class _CheckoutPageViewState extends State<_CheckoutPageView> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          label,
-          style: TextStyle(
-            fontFamily: 'Roboto',
-            fontWeight: FontWeight.w400,
-            fontSize: 14,
-            color: isDark ? AppColors.neutral300 : AppColors.neutral800,
+        Expanded(
+          child: Text(
+            label,
+            style: TextStyle(
+              fontFamily: 'Roboto',
+              fontWeight: FontWeight.w400,
+              fontSize: 14,
+              color: isDark ? AppColors.neutral300 : AppColors.neutral800,
+            ),
           ),
         ),
+        const SizedBox(width: 8),
         Text(
           value,
           style: TextStyle(

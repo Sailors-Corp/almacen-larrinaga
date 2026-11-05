@@ -315,7 +315,9 @@ class _PreferencesBottomSheetState extends State<PreferencesBottomSheet> {
             ),
           ),
 
-          // Language and Currency sub-items (shown when expanded)
+          // Currency sub-item (shown when expanded).
+          // The language selector was removed: Spanish is forced platform-wide
+          // (see LocaleCubit), so there is nothing to choose.
           if (_isPreferencesExpanded)
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -323,16 +325,6 @@ class _PreferencesBottomSheetState extends State<PreferencesBottomSheet> {
                 builder: (context, state) {
                   return Column(
                     children: [
-                      // Language selector
-                      _buildLanguageSelector(
-                        context: context,
-                        isDark: isDark,
-                        secondaryTextColor: secondaryTextColor,
-                        state: state,
-                      ),
-
-                      const SizedBox(height: 12),
-
                       // Currency selector
                       _buildCurrencySelector(
                         context: context,
@@ -347,109 +339,6 @@ class _PreferencesBottomSheetState extends State<PreferencesBottomSheet> {
               ),
             ),
         ],
-      ),
-    );
-  }
-
-  /// Build language selector dropdown
-  Widget _buildLanguageSelector({
-    required BuildContext context,
-    required bool isDark,
-    required Color secondaryTextColor,
-    required PreferencesState state,
-  }) {
-    final l10n = AppLocalizations.of(context)!;
-    final availableLocales = state.locales;
-
-    return Container(
-      decoration: BoxDecoration(
-        color: isDark ? AppColors.neutral600 : AppColors.white,
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              l10n.accountLanguage,
-              style: TextStyle(
-                fontFamily: 'Roboto',
-                fontWeight: FontWeight.w400,
-                fontSize: 14,
-                color: secondaryTextColor,
-              ),
-            ),
-            const SizedBox(height: 8),
-            if (availableLocales.isNotEmpty)
-              BlocBuilder<LocaleCubit, Locale?>(
-                builder: (context, locale) {
-                  final selectedCode = locale?.languageCode;
-                  final dropdownValue = availableLocales.any(
-                    (item) => item.code == selectedCode,
-                  )
-                      ? selectedCode
-                      : availableLocales.first.code;
-
-                  return DropdownButton<String>(
-                    value: dropdownValue,
-                    isExpanded: true,
-                    underline: const SizedBox(),
-                    items: availableLocales.map((locale) {
-                      return DropdownMenuItem<String>(
-                        value: locale.code,
-                        child: Text(
-                          locale.name,
-                          style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontWeight: FontWeight.w400,
-                            fontSize: 14,
-                            color: isDark
-                                ? AppColors.neutral200
-                                : AppColors.neutral900,
-                          ),
-                        ),
-                      );
-                    }).toList(),
-                    onChanged: (value) {
-                      if (value == null) return;
-                      context.read<PreferencesCubit>().updateSelectedLocale(value);
-                      context.read<LocaleCubit>().setLocale(value);
-                    },
-                  );
-                },
-              )
-            else if (state.isLoadingLocales)
-              SizedBox(
-                height: 40,
-                child: Center(
-                  child: SizedBox(
-                    width: 20,
-                    height: 20,
-                    child: CircularProgressIndicator(
-                      strokeWidth: 2,
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        AppColors.primary500,
-                      ),
-                    ),
-                  ),
-                ),
-              )
-            else if (availableLocales.isEmpty)
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8),
-                child: Text(
-                  l10n.accountNoLanguagesAvailable,
-                  style: TextStyle(
-                    fontFamily: 'Roboto',
-                    fontWeight: FontWeight.w400,
-                    fontSize: 12,
-                    color: secondaryTextColor,
-                  ),
-                ),
-              )
-          ],
-        ),
       ),
     );
   }

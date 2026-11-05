@@ -58,7 +58,11 @@ class ProductInfoSection extends StatelessWidget {
           // ── Rating + Stock Row ──
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [_buildRatingGroup(context), _buildStockChip(context)],
+            children: [
+              Expanded(child: _buildRatingGroup(context)),
+              const SizedBox(width: 8),
+              _buildStockChip(context),
+            ],
           ),
         ],
       ),
@@ -179,23 +183,30 @@ class ProductInfoSection extends StatelessWidget {
 
     if (count == 0) {
       final reviewEntry = reviewEntryOf(context);
-      return Row(
+      return Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
+        spacing: 6,
+        runSpacing: 4,
         children: [
-          Icon(Icons.star_border, size: 18, color: isDark ? AppColors.neutral400 : AppColors.neutral500),
-          const SizedBox(width: 4),
-          Text(
-            l10n.productNoReviewsYet,
-            style: TextStyle(
-              fontFamily: 'Roboto',
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
-              color: isDark ? AppColors.neutral400 : AppColors.neutral500,
-            ),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(Icons.star_border, size: 18, color: isDark ? AppColors.neutral400 : AppColors.neutral500),
+              const SizedBox(width: 4),
+              Flexible(
+                child: Text(
+                  l10n.productNoReviewsYet,
+                  style: TextStyle(
+                    fontFamily: 'Roboto',
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    color: isDark ? AppColors.neutral400 : AppColors.neutral500,
+                  ),
+                ),
+              ),
+            ],
           ),
           if (reviewEntry != ReviewEntry.hidden)
-          Row(
-            children: [
-              const SizedBox(width: 6),
               GestureDetector(
                 onTap: () async {
                   final productId = product.numericId;
@@ -237,8 +248,6 @@ class ProductInfoSection extends StatelessWidget {
                   ),
                 ),
               ),
-            ],
-          ),
         ],
       );
     }

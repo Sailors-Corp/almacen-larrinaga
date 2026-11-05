@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:bagisto_flutter/core/constants/api_constants.dart';
+import 'package:bagisto_flutter/core/constants/public_base_url.dart';
 import 'package:bagisto_flutter/core/graphql/queries.dart';
 import 'package:bagisto_flutter/features/home/data/models/home_models.dart';
 import 'package:bagisto_flutter/features/home/data/repository/home_repository.dart';
@@ -219,13 +219,15 @@ void main() {
     final links = columns.expand((column) => column).toList();
     expect(columns, hasLength(2));
     expect(links.map((link) => link.title), ['About Us', 'Privacy Policy']);
+    // Expectations derive from the configured base URL so the test passes in
+    // any environment (it used to hardcode a vendor LAN address).
     expect(
       links.first.resolveUrl(bagistoPublicBaseUrl),
-      'http://192.168.15.239/Bagisto-Api/new-setup/public/page/about-us',
+      '$bagistoPublicBaseUrl/page/about-us',
     );
     expect(
       links.last.resolveUrl(bagistoPublicBaseUrl),
-      'http://192.168.15.239/Bagisto-Api/new-setup/public/page/privacy-policy',
+      '$bagistoPublicBaseUrl/page/privacy-policy',
     );
   });
 
@@ -283,7 +285,7 @@ void main() {
 
     expect(
       banner.fullImageUrl(bagistoPublicBaseUrl),
-      'http://192.168.15.239/Bagisto-Api/new-setup/public/storage/themes/default/sections/1/banner.webp',
+      '$bagistoPublicBaseUrl/storage/themes/default/sections/1/banner.webp',
     );
   });
 }

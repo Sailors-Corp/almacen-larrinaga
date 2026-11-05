@@ -1443,7 +1443,7 @@ class ProductVariant {
       specialPrice: ProductModel._parseSpecialPrice(json['specialPrice']),
       formattedSpecialPrice: json['formattedSpecialPrice'] as String?,
       baseImageUrl: json['baseImageUrl'] as String?,
-      isSaleable: json['isSaleable'] as String?,
+      isSaleable: json['isSaleable']?.toString(),
       color: json['color'] as String? ?? attrMap['color'],
       size: json['size'] as String? ?? attrMap['size'],
       attributeValuesMap: attrMap,
@@ -1571,7 +1571,7 @@ class ProductImage {
       type: json['type'] as String?,
       path: json['path'] as String? ?? '',
       publicPath: json['publicPath'] as String?,
-      position: json['position'] as String?,
+      position: json['position']?.toString(),
     );
   }
 }

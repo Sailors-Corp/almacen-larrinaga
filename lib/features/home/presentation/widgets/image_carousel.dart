@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import '../../../../core/constants/api_constants.dart';
+import '../../../../core/constants/public_base_url.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../data/models/home_models.dart';
 

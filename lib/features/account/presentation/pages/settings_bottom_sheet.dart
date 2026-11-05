@@ -15,22 +15,24 @@ import '../bloc/settings_cubit.dart';
 ///
 /// A modal bottom sheet with rounded top corners containing:
 ///   1. Header: "Settings" title + close (X) icon
-///   2. Change Theme button with sun/moon icon
-///   3. Notifications section with master toggle + sub-toggles
+///   2. Notifications section with master toggle + sub-toggles
 ///      - All Notifications (master toggle)
 ///      - Orders
 ///      - Offers
-///   4. Offline Data section with toggles
+///   3. Offline Data section with toggles
 ///      - Track and Show Recently viewed products
 ///      - Show Search Tag
 ///
-/// Colors from Figma design tokens:
-///   - Background: white (#FFFFFF) / dark: neutral900 (#171717)
-///   - List item bg: neutral100 (#F5F5F5) / dark: neutral800 (#262626)
-///   - Title: neutral900 (#171717) / dark: neutral200
-///   - Section header: neutral800 (#262626) / dark: neutral400
-///   - Body text: neutral900 (#171717) / dark: neutral200
-///   - Active toggle: primary500 (#FF6900)
+/// The theme toggle was removed: dark mode is forced platform-wide
+/// (see ThemeCubit).
+///
+/// Colors from Figma design tokens (black & red rebrand):
+///   - Background: white (#FFFFFF) / dark: neutral900 (#000000)
+///   - List item bg: neutral100 (#F5F5F5) / dark: neutral800 (#171717)
+///   - Title: neutral900 (#000000) / dark: neutral200
+///   - Section header: neutral800 (#171717) / dark: neutral400
+///   - Body text: neutral900 (#000000) / dark: neutral200
+///   - Active toggle: primary500 (#E11D29)
 ///   - Inactive toggle: neutral300 (#D4D4D4)
 
 class SettingsBottomSheet extends StatelessWidget {
@@ -102,10 +104,6 @@ class SettingsBottomSheet extends StatelessWidget {
               // Figma node: 248:8064
               _buildHeader(context, isDark),
 
-              // ── Change Theme button ──
-              // Figma node: 248:8280
-              _buildChangeThemeButton(context, isDark),
-
               const SizedBox(height: 24),
 
               // ── Notifications section ──
@@ -164,60 +162,6 @@ class SettingsBottomSheet extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-
-  /// Change Theme button — Figma node: 248:8280
-  /// Light bg (neutral100), 10px radius, 48px height, with sun/moon icon
-  Widget _buildChangeThemeButton(BuildContext context, bool isDark) {
-    final l10n = AppLocalizations.of(context)!;
-
-    return BlocBuilder<ThemeCubit, ThemeMode>(
-      builder: (context, themeMode) {
-        final isCurrentlyDark = themeMode == ThemeMode.dark;
-        final bgColor = isDark ? AppColors.neutral800 : AppColors.neutral100;
-
-        return Material(
-          color: bgColor,
-          borderRadius: BorderRadius.circular(10),
-          child: InkWell(
-            onTap: () async {
-              await context.read<ThemeCubit>().toggleTheme();
-            },
-            borderRadius: BorderRadius.circular(10),
-            splashColor: AppColors.primary500.withValues(alpha: 0.08),
-            highlightColor: AppColors.primary500.withValues(alpha: 0.04),
-            child: Container(
-              width: double.infinity,
-              height: 48,
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    l10n.accountChangeTheme,
-                    style: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w400,
-                      fontSize: 14,
-                      color: isDark
-                          ? AppColors.neutral200
-                          : AppColors.neutral900,
-                    ),
-                  ),
-                  Icon(
-                    isCurrentlyDark
-                        ? Icons.dark_mode_outlined
-                        : Icons.light_mode_outlined,
-                    size: 22,
-                    color: AppColors.primary500,
-                  ),
-                ],
-              ),
-            ),
-          ),
-        );
-      },
     );
   }
 

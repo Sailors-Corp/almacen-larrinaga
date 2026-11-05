@@ -6,37 +6,30 @@ class ThemeCubit extends Cubit<ThemeMode> {
   static const String _themeKey = 'app_theme_mode';
   late SharedPreferences _prefs;
 
-  ThemeCubit({ThemeMode initialTheme = ThemeMode.light}) : super(initialTheme);
+  /// Dark mode is forced platform-wide: the app always starts in
+  /// [ThemeMode.dark] and every setter below re-emits dark.
+  ThemeCubit() : super(ThemeMode.dark);
 
-  /// Initialize SharedPreferences — call this before using the cubit
+  /// Initialize SharedPreferences — call this before using the cubit.
+  /// The saved preference is ignored and overwritten with `dark`.
   Future<void> initialize(SharedPreferences prefs) async {
     _prefs = prefs;
-    
-    // Load saved theme preference
-    final savedTheme = _prefs.getString(_themeKey);
-    if (savedTheme != null) {
-      if (savedTheme == 'dark') {
-        emit(ThemeMode.dark);
-      } else if (savedTheme == 'light') {
-        emit(ThemeMode.light);
-      }
-    }
+    emit(ThemeMode.dark);
+    await _saveTheme(ThemeMode.dark);
   }
 
-  /// Toggle between light and dark theme, and save to SharedPreferences
+  /// No-op kept for API compatibility — dark mode is forced.
   Future<void> toggleTheme() async {
-    final newTheme = state == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
-    emit(newTheme);
-    await _saveTheme(newTheme);
+    emit(ThemeMode.dark);
+    await _saveTheme(ThemeMode.dark);
   }
 
-  /// Set light theme and save to SharedPreferences
+  /// No-op kept for API compatibility — dark mode is forced.
   Future<void> setLight() async {
-    emit(ThemeMode.light);
-    await _saveTheme(ThemeMode.light);
+    emit(ThemeMode.dark);
+    await _saveTheme(ThemeMode.dark);
   }
 
-  /// Set dark theme and save to SharedPreferences
   Future<void> setDark() async {
     emit(ThemeMode.dark);
     await _saveTheme(ThemeMode.dark);

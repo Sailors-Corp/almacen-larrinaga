@@ -602,9 +602,12 @@ class _AppWithAuthCartSyncState extends State<_AppWithAuthCartSync> {
       child: MultiBlocListener(
         listeners: [
           BlocListener<LocaleCubit, Locale?>(
+            // `previous != null` skips the initial state (the cubit starts on
+            // the forced `es` locale), so startup does not clear the cache.
             listenWhen: (previous, current) =>
+                previous != null &&
                 current != null &&
-                previous?.languageCode != current.languageCode,
+                previous.languageCode != current.languageCode,
             listener: (context, state) async {
               final homeBloc = context.read<HomeBloc>();
               final categoryBloc = context.read<CategoryBloc>();

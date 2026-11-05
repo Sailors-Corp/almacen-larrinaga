@@ -3,8 +3,8 @@
 
 env:
   # App IDs
-  APP_ID_ANDROID: "com.webkul.bagisto.mobikul"
-  APP_ID_IOS: "com.webkul.bagistoApp.iOS"
+  APP_ID_ANDROID: "cloud.nodoplatform.almacenlarrinaga"
+  APP_ID_IOS: "cloud.nodoplatform.almacenlarrinaga"
 
   # Credentials
   USER_EMAIL: "demo.user@example.com"

@@ -74,13 +74,13 @@ class ChannelBootstrapService {
       await prefs.setString(logoUrlCacheKey, logoUrl);
     }
 
-    // Only set defaults when the user has not already selected a preference.
-    final savedLocale = prefs.getString(LocaleCubit.localeKey);
-    if (savedLocale == null &&
-        defaultLocaleCode != null &&
-        defaultLocaleCode.isNotEmpty) {
-      await prefs.setString(LocaleCubit.localeKey, defaultLocaleCode);
-    }
+    // Spanish is forced platform-wide: always persist it so the GraphQL
+    // X-LOCALE header and LocaleCubit resolve to Spanish from the very first
+    // request, regardless of the channel default locale.
+    await prefs.setString(
+      LocaleCubit.localeKey,
+      LocaleCubit.forcedLanguageCode,
+    );
 
     final savedCurrency = prefs.getString(CurrencyCubit.currencyKey);
     if (savedCurrency == null &&
